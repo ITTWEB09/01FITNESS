@@ -1,0 +1,23 @@
+{
+  "name": "01fitness",
+  "version": "1.0.0",
+  "description": "Mandatory Exercise 1",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://ahartvign@github.com/ITTWEB09/01FITNESS.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ITTWEB09/01FITNESS/issues"
+  },
+  "homepage": "https://github.com/ITTWEB09/01FITNESS#readme",
+  "dependencies": {
+    "express": "^4.14.0",
+    "pug": "^2.0.0-beta6"
+  }
+}
