@@ -14,9 +14,7 @@ app.use('/create', function(req, res, next) {
 })
 
 app.use('/api/workoutPlan', function(req, res, next) {
-    if(req.method == 'GET') {
-        api.run(req, res, next);
-    }
+    api.run(req, res, next);
 });
 
 app.use('/', function(req, res, next) {

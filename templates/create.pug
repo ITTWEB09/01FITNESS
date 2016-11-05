@@ -3,7 +3,16 @@ extends layout
 block scripts
     script.
         $(document).ready(function() {
-            alert('#{myVar}');
+            $.ajax({
+                type: 'get',
+                url: '/api/workoutPlan',
+                success: function(data) {
+                    alert(data);
+                },
+                error: function() {
+                    alert('An error occured');
+                }
+            });
         });
 
 block content
