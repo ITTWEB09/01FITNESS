@@ -1,0 +1,10 @@
+extends layout
+
+block scripts
+    script.
+        $(document).ready(function() {
+            alert('#{myVar}');
+        });
+
+block content
+    p Variable value: #{myVar}
