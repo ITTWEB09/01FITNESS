@@ -1,0 +1,54 @@
+div#container {
+    width: 75%;
+    min-width: 700px;
+    max-width: 900px;
+    height: auto;
+    margin: 0 auto;
+}
+
+div#left {
+    border-right: 1px dotted lightgray;
+    padding-right: 15px;
+    width: 25%;
+    float: left;
+}
+
+div#right {
+    width: 70%;
+    float: right;
+}
+
+table#exerciseTable {
+    background-color: #f1f1f1;
+    width: 100%;
+}
+
+textarea {
+    height: 50px;
+    resize: none;
+}
+
+input, textarea {
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+th {
+    text-align: left;
+}
+
+col#nameCol {
+    width: 25%;
+}
+
+col#descCol {
+    width: 45%;
+}
+
+col#setsCol {
+    width: 15%;
+}
+
+col#repsCol {
+    width: 15%;
+}
