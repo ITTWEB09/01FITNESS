@@ -1,6 +1,6 @@
 module.exports = {
     getListOfPlans: function(callback) {
-        callback('{"plans":[{"id":0, "name":"Example plan"}]}', null);
+        callback('{"currentPlans":[{"id":0, "name":"Example current plan"}], "pastPlans":[{"id":1, "name":"Example past plan"}]}', null);
     },
     getPlanById: function(callback, id) {
         if(id == 0) {
