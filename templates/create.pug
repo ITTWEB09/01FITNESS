@@ -1,19 +1,48 @@
 extends layout
 
-block scripts
-    script.
-        $(document).ready(function() {
-            $.ajax({
-                type: 'get',
-                url: '/api/workoutPlan',
-                success: function(data) {
-                    alert(data);
-                },
-                error: function() {
-                    alert('An error occured');
-                }
-            });
-        });
+block includes
+    link(rel='stylesheet', href='/stylesheets/create.css')
+    script(type='text/javascript' src='/scripts/create.js')
 
 block content
-    p Variable value: #{myVar}
+    div#container
+        div#left
+            h1 Add exercise
+            | Name: <br/>
+            input(type='text', id='nameInput')
+            <br/>
+
+            | Description: <br/>
+            textarea(id='descInput')
+            <br/>
+
+            | Sets: <br/>
+            input(type='number', id='setsInput')
+            <br/>
+
+            | Repetitions: <br/>
+            input(type='number', id='repsInput')
+            <br/>
+
+            input(type='button', id='addButton', value='Add exercise')
+            <br/><br/><hr/>
+
+            h1 Finish plan
+            | Plan name: <br/>
+            input(type='text', id='planNameInput')
+            <br/>
+
+            input(type='button', id='finishButton', value='Save plan')
+        div#right
+            h1 Exercise list
+            table#exerciseTable
+                colgroup
+                    col(span='1', id='nameCol')
+                    col(span='1', id='descCol')
+                    col(span='1', id='setsCol')
+                    col(span='1', id='repsCol')
+                tr 
+                    th Name
+                    th Description
+                    th Sets
+                    th Repetitions
