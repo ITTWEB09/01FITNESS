@@ -1,52 +1,52 @@
-$(document).ready(function() {
-    function validateAddData(name, desc, sets, reps) {
-        return name && desc && sets && reps;
+function validateAddData(name, desc, sets, reps) {
+    return name && desc && sets && reps;
+}
+
+function validatePlan() {
+    if($('#exerciseTable td').length == 0) {
+        alert('You cannot submit an empty plan.');
+        return;
     }
 
-    function validatePlan() {
-        if($('#exerciseTable td').length == 0) {
-            alert('You cannot submit an empty plan.');
-            return;
-        }
+    var planName = $('#planNameInput').val();
 
-        var planName = $('#planNameInput').val();
-
-        if(!planName) {
-            alert('The plan needs a name.');
-            return;
-        }
-
-        return planName;
+    if(!planName) {
+        alert('The plan needs a name.');
+        return;
     }
 
-    function getPlanData(planName) {
-        var table = $('#exerciseTable');
-        var dataObject = {
-            name: planName,
-            exercises: []
-        };
+    return planName;
+}
 
-        // Source: http://stackoverflow.com/questions/17120633/loop-through-each-html-table-column-and-get-the-data-using-jquery
-        table.find('tr').each(function (i, el) {
-            var $tds = $(this).find('td'),
-                id = i,
-                name = $tds.eq(0).text(),
-                desc = $tds.eq(1).text(),
-                sets = parseInt($tds.eq(2).text(), 10),
-                reps = parseInt($tds.eq(3).text(), 10);
-            
-            dataObject.exercises.push({
-                id: id,
-                name: name,
-                desc: desc,
-                sets: sets,
-                reps: reps
-            });
+function getPlanData(planName) {
+    var table = $('#exerciseTable');
+    var dataObject = {
+        name: planName,
+        exercises: []
+    };
+
+    // Source: http://stackoverflow.com/questions/17120633/loop-through-each-html-table-column-and-get-the-data-using-jquery
+    table.find('tr').each(function (i, el) {
+        var $tds = $(this).find('td'),
+            id = i,
+            name = $tds.eq(0).text(),
+            desc = $tds.eq(1).text(),
+            sets = parseInt($tds.eq(2).text(), 10),
+            reps = parseInt($tds.eq(3).text(), 10);
+        
+        dataObject.exercises.push({
+            id: id,
+            name: name,
+            desc: desc,
+            sets: sets,
+            reps: reps
         });
+    });
 
-        return JSON.stringify(dataObject);
-    }
+    return JSON.stringify(dataObject);
+}
 
+$(document).ready(function() {
     $('#addButton').click(function () {
         var name = $('#nameInput').val();
         var desc = $('#descInput').val();
