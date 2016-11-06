@@ -1,26 +1,20 @@
 extends layout
 
 block scripts
-    script.
-        var currentPrograms = document.getElementById('lol')
-        for (var i = 0; i < 3; i++){
-            var opt = document.createElement('option');
-            opt.value = i;
-            opt.innerHTML = i;
-            currentPrograms.appendChild(opt);
-        }
-
+    script(type='text/javascript' src='/scripts/index.js')
+      
 block content
     h4 Schedule:
     
-    select#lol
+    select#currentPrograms
+    select#pastPrograms
        
-    table
+    table#mainTable
         tr
             th Exercise
             th Description
             th Set
             th Reps
         tr
-    button(onclick='createProgram()') Create
-        button(onclick='logProgram()') Log    
+    button#createProgram Create
+        button#logProgram Log    
