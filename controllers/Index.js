@@ -3,12 +3,10 @@ var model = require('../models/ContentModel');
 
 module.exports = {
     run: function(req, res) {
-        model.getData(function(workoutPlan) {
-            var content = {};
-            content.myVar = workoutPlan;
+        var content = {};
+        content.myVar = 'PogChamp';
 
-            var v = new View(res, 'index');
-            v.render(content);
-        });
+        var v = new View(res, 'index');
+        v.render(content);
     }
 };
