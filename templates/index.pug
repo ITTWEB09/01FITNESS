@@ -4,18 +4,23 @@ block scripts
     script(type='text/javascript' src='/scripts/index.js')
       
 block content
-    h4 Schedule:
+    
     
     select#currentPrograms
     select#pastPrograms
-       
+    
+    h1 Plan:
     table#mainTable
-        tr
-            th Exercise
+        colgroup
+            col(span='1', id='nameCol')
+            col(span='1', id='descCol')
+            col(span='1', id='setsCol')
+            col(span='1', id='repsCol')
+        tr 
+            th Name
             th Description
-            th Set
-            th Reps
-        tr
+            th Sets
+            th Repetitions
     
     button#createProgram Create
         button#logProgram Log    
