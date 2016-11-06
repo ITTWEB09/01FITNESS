@@ -7,6 +7,7 @@ var port = 8000;
 
 var api = require('./controllers/Api');
 var index = require('./controllers/Index');
+var create = require('./controllers/Create');
 
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(bodyParser.json());
@@ -27,6 +28,10 @@ app.use('/api/workoutPlan', function(req, res) {
     } else {
         res.sendStatus(405);
     }
+});
+
+app.use('/create', function(req, res) {
+    create.run(req, res);
 });
 
 app.use('/', function(req, res) {
