@@ -22,11 +22,12 @@ function getPlanData(planName) {
     var table = $('#exerciseTable');
     var dataObject = {
         name: planName,
+        completed: 0,
         exercises: []
     };
 
     // Source: http://stackoverflow.com/questions/17120633/loop-through-each-html-table-column-and-get-the-data-using-jquery
-    table.find('tr').each(function (i, el) {
+    table.find('tr').slice(1).each(function (i, el) {
         var $tds = $(this).find('td'),
             id = i,
             name = $tds.eq(0).text(),

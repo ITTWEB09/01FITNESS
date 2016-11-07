@@ -8,23 +8,20 @@ module.exports = {
                 return;  
             } 
 
-            res.status(200).send(workoutPlans);
+            var jsonString = JSON.stringify(workoutPlans);
+            res.status(200).send(jsonString);
         });
     },
     getById: function(req, res, id) {
-        if(isNaN(id)) {
-            res.status(400).send('Error: The id must be a number.');
-            return;
-        }
-
         model.getPlanById(function(workoutPlan, err) {
             if(!workoutPlan || err) {
                 res.status(404).send('Error: ' + err);
                 return;
             }
 
-            res.status(200).send(workoutPlan);
-        }, +id);
+            var jsonString = JSON.stringify(workoutPlan);
+            res.status(200).send(jsonString);
+        }, id);
     },
     create: function(req, res) {
         model.createPlan(function(err) {
@@ -33,7 +30,7 @@ module.exports = {
                 return;
             }
 
-            res.status(200).send(workoutPlan);
+            res.sendStatus(200);
         }, req.body);
     }
 }

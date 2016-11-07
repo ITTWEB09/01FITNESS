@@ -6,10 +6,9 @@ function updateTable(select, successCallback) {
             timeout: 3000,
             success: function(data) {
                 //Not working as intended. Need to reset table
-                $('#mainTable tr').slice(1).remove();
-                               
+                $('#exerciseTable tr').slice(1).remove();
+
                 var json = JSON.parse(data);
-                console.log(json);
                 
                 json.exercises.forEach(function(element) {
                     var name = element.name;
@@ -17,7 +16,7 @@ function updateTable(select, successCallback) {
                     var sets = element.sets;
                     var reps = element.reps;
                     
-                    $('#mainTable').append($(document.createElement('tr'))
+                    $('#exerciseTable').append($(document.createElement('tr'))
                         .append($(document.createElement('td')).html(name))
                         .append($(document.createElement('td')).html(desc))
                         .append($(document.createElement('td')).html(sets))
@@ -42,20 +41,32 @@ $(document).ready(function() {
         timeout: 3000,
         success: function(data) {
             var currentPrograms = $('#currentPrograms');
-            var pastPrograms = $('#pastPrograms')
-            var json = JSON.parse(data);
+            var pastPrograms = $('#pastPrograms');
             
-            json.currentPlans.forEach(function(element) {
+            var json = JSON.parse(data);
+
+            var current = [];
+            var past = [];
+
+            json.forEach(function(el) {
+                if(el.completed == '0') {
+                    current.push(el);
+                } else {
+                    past.push(el);
+                }
+            });
+
+            current.forEach(function(element) {
                 var opt = document.createElement('option');
-                opt.value = element.id;
+                opt.value = element._id;
                 opt.innerHTML = element.name;
                 
                 currentPrograms.append(opt);
             }, this);
             
-            json.pastPlans.forEach(function(element) {
+            past.forEach(function(element) {
                 var opt = document.createElement('option');
-                opt.value = element.id;
+                opt.value = element._id;
                 opt.innerHTML = element.name;
                 
                 pastPrograms.append(opt);
@@ -80,7 +91,7 @@ $(document).ready(function() {
 
     $('#createProgram').click(function () {
         console.log("Create clicked");
-        window.location.replace("create");
+        window.location.href = "/create";
     });
 
     $('#logProgram').click(function () {

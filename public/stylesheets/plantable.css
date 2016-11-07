@@ -1,0 +1,24 @@
+table#exerciseTable {
+    background-color: #f1f1f1;
+    width: 100%;
+}
+
+th {
+    text-align: left;
+}
+
+col#nameCol {
+    width: 25%;
+}
+
+col#descCol {
+    width: 45%;
+}
+
+col#setsCol {
+    width: 15%;
+}
+
+col#repsCol {
+    width: 15%;
+}

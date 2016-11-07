@@ -1,79 +1,63 @@
+var mongodb = require('mongodb');
+var MongoClient = mongodb.MongoClient;
+
+var connUrl = 'mongodb://localhost:27017/db';
+
+function doSomeWork(successCB, errorCB) {
+    MongoClient.connect(connUrl, function (err, db) {
+        if (err) {
+            errorCB('Unable to connect to the mongoDB server. Error:' + err);
+        } else {
+            console.log('Connection established to', connUrl);
+
+            successCB(db);
+            db.close();
+        }
+    });
+}
+
 module.exports = {
     getListOfPlans: function(callback) {
-        callback(`
-            {
-                "currentPlans":
-                    [
-                        {
-                            "id":0, 
-                            "name":"Example current plan 1"
-                        }, 
-                        {
-                            "id":2,
-                            "name":"Example current plan 2"
+            doSomeWork(function(db) {
+                    db.collection('workoutPlans').find({}, {_id : 1, name: 1, completed: 1}).toArray(function(err, docs) {
+                        if(err) {
+                            callback(null, err);
+                        } else {
+                            console.log(docs);
+                            callback(docs, null);
                         }
-                    ], 
-                "pastPlans":
-                    [
-                        {
-                            "id":1, 
-                            "name":"Example past plan 1"
-                        }, 
-                        {
-                            "id":3, 
-                            "name":"Example past plan 2"
-                        }
-                    ]
-            }`, null);
+                    });
+                }, function(err) {
+                    console.log(err);
+                });
     },
     getPlanById: function(callback, id) {
-        if(id == 0) {
-            callback(`
-            {  
-                "name":"Example current plan 1",
-                "exercises":[  
-                    {  
-                        "id":0,
-                        "name":"Deadlift",
-                        "desc":"Heavy ass shit.",
-                        "sets":3,
-                        "reps":4
-                    },
-                    {  
-                        "id":1,
-                        "name":"Pulldown",
-                        "desc":"Lateral action.",
-                        "sets":3,
-                        "reps":8
-                    }
-                ]
-            }`, null);
-        } else if(id == 1) {
-            callback(`
-            {  
-                "name":"Example past plan 1",
-                "exercises":[  
-                    {  
-                        "id":0,
-                        "name":"Dumbell press",
-                        "desc":"Great exercise for building all kinds of chest.",
-                        "sets":3,
-                        "reps":10
-                    },
-                    {  
-                        "id":1,
-                        "name":"Curls",
-                        "desc":"For the girls.",
-                        "sets":3,
-                        "reps":10
-                    }
-                ]
-            }`, null); 
-        } else {
-            callback(null, 'The plan doesn\'t exist.');
-        }
+            doSomeWork(function(db) {
+                    db.collection('workoutPlans').findOne({_id: mongodb.ObjectId(id)}, {exercises: 1, _id: 0}, function(err, doc) {
+                        if(err) {
+                            callback(null, err);
+                        } else {
+                            console.log(doc);
+                            callback(doc, null);
+                        }
+                    });
+                }, function(err) {
+                    console.log(err);
+                });
     },
     createPlan: function(callback, plan) {
-        // TODO: MongoLULZ
+        doSomeWork(function(db) {
+            var collection = db.collection('workoutPlans');
+
+            collection.insert(plan, function(err, result) {
+                if(err) {
+                    callback(err);
+                } else {
+                    callback(null);
+                }
+            });
+        }, function(err) {
+            console.log(err);
+        });
     }
 };

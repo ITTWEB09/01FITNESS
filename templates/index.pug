@@ -1,28 +1,33 @@
 extends layout
 
 block scripts
+    link(rel='stylesheet', href='/stylesheets/index.css')
+    link(rel='stylesheet', href='/stylesheets/plantable.css')
     script(type='text/javascript' src='/scripts/index.js')
       
 block content
-    
-    
-    select#currentPrograms
-        option(selected, disabled) Current programs
-    select#pastPrograms
-        option(selected, disabled) Past programs
-    
-    h1 Plan:
-    table#mainTable
-        colgroup
-            col(span='1', id='nameCol')
-            col(span='1', id='descCol')
-            col(span='1', id='setsCol')
-            col(span='1', id='repsCol')
-        tr 
-            th Name
-            th Description
-            th Sets
-            th Repetitions
-    
-    button#createProgram Create
-        button#logProgram Log    
+    div#container
+        div#options
+            select#currentPrograms
+                option(selected, disabled) Current programs
+            select#pastPrograms
+                option(selected, disabled) Past programs
+            <br/>
+
+            button#createProgram Create
+            button#logProgram Log    
+        
+        h1 Plan:
+        table#exerciseTable
+            colgroup
+                col(span='1', id='nameCol')
+                col(span='1', id='descCol')
+                col(span='1', id='setsCol')
+                col(span='1', id='repsCol')
+            tr 
+                th Name
+                th Description
+                th Sets
+                th Repetitions
+        
+        
