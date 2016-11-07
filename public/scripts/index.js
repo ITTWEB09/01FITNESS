@@ -5,7 +5,6 @@ function updateTable(select, successCallback) {
             contentType: 'application/json; charset=utf-8',
             timeout: 3000,
             success: function(data) {
-                //Not working as intended. Need to reset table
                 $('#exerciseTable tr').slice(1).remove();
 
                 var json = JSON.parse(data);
@@ -31,6 +30,20 @@ function updateTable(select, successCallback) {
                 alert('An error occured: ' + errorThrown);
             }
         });
+}
+
+function completePlan(id){
+    $.ajax({
+        type: 'PUT',
+        url: '/api/workoutPlan/complete/' + id,
+        timeout: 3000,
+        success: function(data) {
+            alert('Plan updated!')
+        },
+        error: function(jqXhr, textStatus, errorThrown) {
+            alert('An error occured: ' + errorThrown);
+        }
+    });
 }
 
 $(document).ready(function() {
@@ -90,12 +103,16 @@ $(document).ready(function() {
     });
 
     $('#createProgram').click(function () {
-        console.log("Create clicked");
         window.location.href = "/create";
     });
 
     $('#logProgram').click(function () {
-        return;
-    });
+        var currentPrograms = $('#currentPrograms').val();
 
+        if(!currentPrograms || currentPrograms == 0) {
+            alert('No current plan selected!');
+        } else {
+            completePlan(currentPrograms);
+        }
+    });
 });

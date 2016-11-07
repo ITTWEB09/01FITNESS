@@ -32,5 +32,15 @@ module.exports = {
 
             res.sendStatus(200);
         }, req.body);
+    },
+    complete: function(req, res, id){
+        model.complete(function(err){
+            if(err){
+                res.status(404).send('Error: ' + err);
+                return;
+            }
+
+            res.sendStatus(200);
+        }, id);
     }
 }

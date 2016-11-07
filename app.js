@@ -12,6 +12,15 @@ var create = require('./controllers/Create');
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(bodyParser.json());
 
+app.use('/api/workoutPlan/complete/:id', function(req, res) {
+    console.log(req.method);
+    if(req.method == 'PUT'){
+        api.complete(req, res, req.params.id);
+    } else {
+        res.sendStatus(405);
+    }
+});
+
 app.use('/api/workoutPlan/:id', function(req, res) {
     if(req.method == 'GET') {
         api.getById(req, res, req.params.id);
