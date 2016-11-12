@@ -23,7 +23,6 @@ module.exports = {
                     if(err) {
                         callback(null, err);
                     } else {
-                        console.log(docs);
                         callback(docs, null);
                     }
                 });
@@ -37,7 +36,6 @@ module.exports = {
                     if(err) {
                         callback(null, err);
                     } else {
-                        console.log(doc);
                         callback(doc, null);
                     }
                 });

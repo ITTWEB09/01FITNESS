@@ -5,47 +5,11 @@ var bodyParser = require('body-parser');
 var app = express();
 var port = 8000;
 
-var api = require('./controllers/Api');
-var index = require('./controllers/Index');
-var create = require('./controllers/Create');
-
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(bodyParser.json());
 
-app.use('/api/workoutPlan/complete/:id', function(req, res) {
-    console.log(req.method);
-    if(req.method == 'PUT'){
-        api.complete(req, res, req.params.id);
-    } else {
-        res.sendStatus(405);
-    }
-});
-
-app.use('/api/workoutPlan/:id', function(req, res) {
-    if(req.method == 'GET') {
-        api.getById(req, res, req.params.id);
-    } else {
-        res.sendStatus(405);
-    }
-});
-
-app.use('/api/workoutPlan', function(req, res) {
-    if(req.method == 'GET') {
-        api.getList(req, res);
-    } else if(req.method == 'POST') {
-        api.create(req, res);
-    } else {
-        res.sendStatus(405);
-    }
-});
-
-app.use('/create', function(req, res) {
-    create.run(req, res);
-});
-
-app.use('/', function(req, res) {
-    index.run(req, res);
-});
+require('./routes/routes')(app);
+require('./routes/routes_api')(app);
 
 app.set('views', path.join(__dirname, 'templates'));
 app.set('view engine', 'pug');
