@@ -1,7 +1,7 @@
 var mongodb = require('mongodb');
 var MongoClient = mongodb.MongoClient;
 
-var connUrl = 'mongodb://localhost:27017/db';
+var connUrl = 'mongodb://ahartvign:hs917112@ds139567.mlab.com:39567/ittwebdb';
 
 function doSomeWork(successCB, errorCB) {
     MongoClient.connect(connUrl, function (err, db) {
