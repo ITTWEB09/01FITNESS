@@ -8,8 +8,8 @@ app.set('port', (process.env.PORT || 5000));
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(bodyParser.json());
 
-require('./routes/routes')(app);
 require('./routes/routes_api')(app);
+require('./routes/routes')(app);
 
 app.set('views', path.join(__dirname, 'templates'));
 app.set('view engine', 'pug');

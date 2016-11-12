@@ -1,13 +1,17 @@
 var mongodb = require('mongodb');
-var MongoClient = mongodb.MongoClient;
+//var MongoClient = mongodb.MongoClient;
 
-var connUrl = 'mongodb://ahartvign:hs917112@ds139567.mlab.com:39567/ittwebdb';
+var connUrl = 'mongodb://testuser:testpassword@ds139567.mlab.com:39567/ittwebdb';
 
 function doSomeWork(successCB, errorCB) {
-    MongoClient.connect(connUrl, function (err, db) {
+    mongodb.connect(connUrl, function (err, db) {
         if (err) {
             errorCB('Unable to connect to the mongoDB server. Error:' + err);
         } else {
+            db.addListener("error", function(error){
+                console.log(error);
+            });
+
             console.log('Connection established to', connUrl);
 
             successCB(db);
