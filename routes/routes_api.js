@@ -1,9 +1,16 @@
 var api = require('../controllers/Api');
 
 module.exports = function(app){
+    app.use('/api/authenticate', function(req, res) {
+        if(req.method == 'POST') {
+            api.createToken(req, res, app.get('secret'));
+        } else {
+            res.sendStatus(405);
+        }
+    })
+
     app.use('/api/workoutPlan/complete/:id', function(req, res) {
-        console.log(req.method);
-        if(req.method == 'PUT'){
+        if(req.method == 'PUT') {
             api.complete(req, res, req.params.id);
         } else {
             res.sendStatus(405);

@@ -1,9 +1,11 @@
 var path = require('path');
 var express = require('express');
 var bodyParser = require('body-parser');
+var config = require('./config');
 
 var app = express();
 app.set('port', (process.env.PORT || 5000));
+app.set('secret', config.secret);
 
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(bodyParser.json());

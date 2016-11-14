@@ -21,6 +21,9 @@ function doSomeWork(successCB, errorCB) {
 }
 
 module.exports = {
+    lookUpUser: function(callback, username, password) {
+            callback(true, null);
+    },
     getListOfPlans: function(callback) {
         doSomeWork(function(db) {
                 db.collection('workoutPlans').find({}, {_id : 1, name: 1, completed: 1}).toArray(function(err, docs) {
