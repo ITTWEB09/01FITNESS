@@ -41,7 +41,7 @@ module.exports = {
                 if(doc) {
                     callback(true, null);
                 } else {
-                    callback
+                    callback(false, null);
                 }
             });
         })            

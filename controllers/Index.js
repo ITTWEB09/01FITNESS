@@ -3,8 +3,6 @@ var model = require('../models/ContentModel');
 
 module.exports = {
     run: function(req, res) {
-        var content = {};
-
         var v = new View(res, 'index');
         v.render(content);
     }

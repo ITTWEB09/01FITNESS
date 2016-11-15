@@ -50,4 +50,8 @@ $(document).ready(function() {
 
         doLogin(username, password);
     });
+
+    $('#signupButton').click(function() {
+    window.location.href = "/signup";
+    }); 
 });

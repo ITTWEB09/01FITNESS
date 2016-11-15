@@ -1,14 +1,3 @@
-$('#signupButton').click(function () {
-        var username = $('#usernameInput').val();
-        var password = $('#passwordInput').val();
-        
-        if(username != null && password != null) {
-            signup(username, password);
-        } else {
-            alert('Please enter username and password!');
-        }        
-});
-
 function signup(username, password) {
     var data = {
         username: username,
@@ -30,3 +19,16 @@ function signup(username, password) {
             }
         });
 }
+
+$(document).ready(function() {
+    $('#signupButton').click(function () {
+        var username = $('#usernameInput').val();
+        var password = $('#passwordInput').val();
+        
+        if(username != null && password != null) {
+            signup(username, password);
+        } else {
+            alert('Please enter username and password!');
+        }        
+    });
+});
