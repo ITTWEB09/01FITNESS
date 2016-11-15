@@ -42,5 +42,15 @@ module.exports = {
 
             res.sendStatus(200);
         }, id);
+    },
+    saveUser: function(req, res){
+         model.saveNewUser(function(err){
+             if(err) {
+                 res.status(400).send('Error ' + err);
+                 return;
+             }
+             
+             res.sendStatus(200);
+         }, req.body);
     }
 }
