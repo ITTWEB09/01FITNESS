@@ -4,13 +4,13 @@ var model = require('./models/ContentModel');
 var jwt = require('jsonwebtoken');
 
 passport.use(new Strategy(  
-    function(username, password, done) {
+    function(username, password, next) {
         model.lookUpUser(function(isFound, err){
           if(err) {
               res.status(500).send('Error: ' + err);
           } else {
               if(isFound) {
-                done(null, {});
+                next(null, {});
               } else {
                 done(null, false);
               }

@@ -22,11 +22,14 @@ function doLogin(username, password) {
         dataType: 'text',
         contentType: 'application/json; charset=utf-8',
         data: '{"username": "' + username + '", "password" : "' + password + '"}',
-        success: function (data){
+        success: function (data) {
             createCookie(data, null);
 
             var redirectUrl = getUrlParameter('redirect');
             document.location.href = (redirectUrl ? redirectUrl : "index");
+        },
+        error: function() {
+            alert('Username or password is wrong!');
         }
     });
 }

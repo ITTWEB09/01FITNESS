@@ -38,14 +38,17 @@ module.exports = {
     lookUpUser: function(callback, username, password) {
         doSomeWork(function(db) {
             db.collection('users').findOne({username: username, password: password}, function(err, doc) {
-                if(doc) {
-                    callback(true, null);
+                if(err) {
+                    callback(null, err);
                 } else {
-                    callback
+                    if(doc) {
+                        callback(true, null);
+                    } else {
+                        callback(false, null);
+                    }
                 }
             });
-        })            
-            
+        })                      
     },
     getListOfPlans: function(callback) {
         doSomeWork(function(db) {
