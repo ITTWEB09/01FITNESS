@@ -36,11 +36,20 @@ module.exports = {
         })
     },
     lookUpUser: function(callback, username, password) {
-            callback(true, null);
+        doSomeWork(function(db) {
+            db.collection('users').findOne({username: username, password: password}, function(err, doc) {
+                if(doc) {
+                    callback(true, null);
+                } else {
+                    callback
+                }
+            });
+        })            
+            
     },
     getListOfPlans: function(callback) {
         doSomeWork(function(db) {
-                db.collection('workoutPlans').find({}, {_id : 1, name: 1, completed: 1}).toArray(function(err, docs) {
+            db.collection('workoutPlans').find({}, {_id : 1, name: 1, completed: 1}).toArray(function(err, docs) {
                     if(err) {
                         callback(null, err);
                     } else {
@@ -53,7 +62,7 @@ module.exports = {
     },
     getPlanById: function(callback, id) {
         doSomeWork(function(db) {
-                db.collection('workoutPlans').findOne({_id: mongodb.ObjectId(id)}, {exercises: 1, _id: 0}, function(err, doc) {
+            db.collection('workoutPlans').findOne({_id: mongodb.ObjectId(id)}, {exercises: 1, _id: 0}, function(err, doc) {
                     if(err) {
                         callback(null, err);
                     } else {
