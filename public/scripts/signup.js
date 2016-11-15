@@ -1,14 +1,9 @@
 function signup(username, password) {
-    var data = {
-        username: username,
-        password: password
-    };
-
     $.ajax({
             type: 'POST',
             url: '/api/saveUser',
             contentType: 'application/json; charset=utf-8',
-            data: data,
+            data: '{"username": "' + username + '", "password" : "' + password + '"}',
             timeout: 3000,
             success: function(data, textStatus, jQxhr) {
                 alert('User added!');
