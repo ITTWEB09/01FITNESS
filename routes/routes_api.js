@@ -26,4 +26,11 @@ module.exports = function(app, authenticate){
             res.sendStatus(405);
         }
     });
+    app.use('/api/saveUser', function(req, res) {
+        if(req.method == 'POST') {
+            api.saveUser(req, res);
+        } else {
+            res.sendStatus(405);
+        }
+    })
 }

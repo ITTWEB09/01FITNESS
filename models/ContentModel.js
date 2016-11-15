@@ -1,5 +1,4 @@
 var mongodb = require('mongodb');
-//var MongoClient = mongodb.MongoClient;
 
 var connUrl = 'mongodb://testuser:testpassword@ds139567.mlab.com:39567/ittwebdb';
 
@@ -21,6 +20,21 @@ function doSomeWork(successCB, errorCB) {
 }
 
 module.exports = {
+    saveNewUser: function(callback, userObj) {
+        doSomeWork(function(db) {
+            var collection = db.collection('users');
+
+            collection.insert(userObj, function(err, result){
+                    if(err) {
+                        callback(err);
+                    } else {
+                        callback(null);
+                    }
+                }, function(err) {
+                    console.log(err);
+                });
+        })
+    },
     lookUpUser: function(callback, username, password) {
             callback(true, null);
     },

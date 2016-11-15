@@ -1,0 +1,15 @@
+extends layout
+
+block includes
+    link(rel='stylesheet', href='/stylesheets/style.css')
+    script(type='text/javascript' src='/scripts/siugnup.js')
+
+block content
+    div#container
+        h1 Signup
+        | Username
+        input(type='text', id='usernameInput')
+        | Password
+        input(type='text', id='passwordInput')
+
+        input(type='button', id='signupButton', value='Submit')
