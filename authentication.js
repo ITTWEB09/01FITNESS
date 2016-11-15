@@ -12,7 +12,7 @@ passport.use(new Strategy(
               if(isFound) {
                 next(null, {});
               } else {
-                done(null, false);
+                next(null, false);
               }
           }
         }, username, password)
