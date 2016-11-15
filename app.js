@@ -33,7 +33,6 @@ require('./routes/routes')(app, authenticate);
 
 app.use(function (err, req, res, next) {
     if (err.name === 'UnauthorizedError') {
-        console.log(req);
         res.redirect('/login?redirect=' + req.originalUrl);
     }
 });
