@@ -1,23 +1,6 @@
 var model = require('../models/ContentModel');
-var jwt = require('jsonwebtoken');
 
 module.exports = {
-    createToken: function(req, res, secret) {
-        var userObj = req.body;
-        model.lookUpUser(function(isFound, err){
-            if(err) {
-                res.status(500).send('Error: ' + err);
-            } else {
-                if(isFound) {
-                    var token = jwt.sign(userObj.username, secret, {
-                    });
-                    res.status(200).send(token);
-                } else {
-                    res.sendStatus(404);
-                }
-            }
-      }, userObj.username, userObj.password);  
-    },
     getList: function(req, res) {
         model.getListOfPlans(function(workoutPlans, err) {
             if(!workoutPlans || err) {

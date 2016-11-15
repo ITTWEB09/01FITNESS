@@ -1,15 +1,7 @@
 var api = require('../controllers/Api');
 
-module.exports = function(app){
-    app.use('/api/authenticate', function(req, res) {
-        if(req.method == 'POST') {
-            api.createToken(req, res, app.get('secret'));
-        } else {
-            res.sendStatus(405);
-        }
-    })
-
-    app.use('/api/workoutPlan/complete/:id', function(req, res) {
+module.exports = function(app, authenticate){
+    app.use('/api/workoutPlan/complete/:id', authenticate, function(req, res) {
         if(req.method == 'PUT') {
             api.complete(req, res, req.params.id);
         } else {
@@ -17,7 +9,7 @@ module.exports = function(app){
         }
     });
 
-    app.use('/api/workoutPlan/:id', function(req, res) {
+    app.use('/api/workoutPlan/:id', authenticate, function(req, res) {
         if(req.method == 'GET') {
             api.getById(req, res, req.params.id);
         } else {
@@ -25,7 +17,7 @@ module.exports = function(app){
         }
     });
 
-    app.use('/api/workoutPlan', function(req, res) {
+    app.use('/api/workoutPlan', authenticate, function(req, res) {
         if(req.method == 'GET') {
             api.getList(req, res);
         } else if(req.method == 'POST') {
