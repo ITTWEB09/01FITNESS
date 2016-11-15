@@ -8,15 +8,20 @@ block scripts
 block content
     div#container
         div#options
-            select#currentPrograms
-                option(selected, disabled) Current programs
-            select#pastPrograms
-                option(selected, disabled) Past programs
-            <br/>
+            div#leftControls
+                select#currentPrograms
+                    option(selected, disabled) Current programs
+                select#pastPrograms
+                    option(selected, disabled) Past programs
+                <br/>
 
-            button#createProgram Create
-            button#logProgram Log    
+                button#createProgram Create
+                button#logProgram Log 
+            div#rightControls
+                button#logout Logout   
         
+        <br/><br/><br/>
+
         h1 Plan:
         table#exerciseTable
             colgroup

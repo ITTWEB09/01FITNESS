@@ -46,6 +46,15 @@ function completePlan(id){
     });
 }
 
+// Source: http://stackoverflow.com/questions/2144386/javascript-delete-cookie
+function deleteCookie() {
+    var date = new Date();
+    date.setTime(date.getTime() - 1);
+    var expires = "; expires=" + date.toGMTString();
+
+    document.cookie = "myToken=" + expires + "; path=/";
+}
+
 $(document).ready(function() {
     $.ajax({
         type: 'GET',
@@ -102,11 +111,11 @@ $(document).ready(function() {
         });
     });
 
-    $('#createProgram').click(function () {
+    $('#createProgram').click(function() {
         window.location.href = "/create";
     });
 
-    $('#logProgram').click(function () {
+    $('#logProgram').click(function() {
         var currentPrograms = $('#currentPrograms').val();
 
         if(!currentPrograms || currentPrograms == 0) {
@@ -114,5 +123,10 @@ $(document).ready(function() {
         } else {
             completePlan(currentPrograms);
         }
+    });
+
+    $('#logout').click(function() {
+        deleteCookie();
+        window.location.href = "/login";
     });
 });

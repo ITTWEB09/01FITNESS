@@ -23,7 +23,10 @@ module.exports = passport;
 
 module.exports = function(app){
     app.use(passport.initialize());  
-    app.post('/auth', passport.authenticate(  
+    app.post('/auth', function(req, res, next) {
+      console.log(req);
+      next();
+    }, passport.authenticate(  
       'local', {
         session: false
       }), createToken, respond);
